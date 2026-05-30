@@ -17,9 +17,11 @@ import Logo from './Logo';
 interface SidebarProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
+  isOpen?: boolean;
+  onClose?: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
+const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, isOpen = false, onClose }) => {
   const primaryNavItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'capture', label: 'Knowledge Capture', icon: BrainCircuit },
@@ -36,66 +38,85 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
   ];
 
   return (
-    <div className="w-64 h-full bg-white border-r border-slate-200 flex flex-col justify-between shrink-0 font-sans">
-      {/* Brand Header */}
-      <div>
-        <Logo />
+    <>
+      {/* Mobile Backdrop Overlay */}
+      {isOpen && (
+        <div 
+          onClick={onClose}
+          className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-40 lg:hidden transition-opacity duration-300"
+        />
+      )}
 
-        {/* Primary Navigation links */}
-        <nav className="p-4 space-y-1">
-          {primaryNavItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = activeTab === item.id;
-            return (
-              <button
-                key={item.id}
-                id={`${item.id}-tab-btn`}
-                onClick={() => setActiveTab(item.id)}
-                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all group duration-200 ${
-                  isActive
-                    ? 'bg-brand-50 text-brand-600 shadow-sm'
-                    : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <Icon className={`w-4.5 h-4.5 transition-colors ${
-                    isActive ? 'text-brand-600' : 'text-slate-400 group-hover:text-slate-600'
+      {/* Sidebar Container */}
+      <div className={`w-64 h-full bg-white border-r border-slate-200 flex flex-col justify-between shrink-0 font-sans
+        fixed inset-y-0 left-0 z-50 lg:static lg:translate-x-0 transition-transform duration-300 ease-in-out
+        ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+      `}>
+        {/* Brand Header */}
+        <div>
+          <Logo />
+
+          {/* Primary Navigation links */}
+          <nav className="p-4 space-y-1">
+            {primaryNavItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = activeTab === item.id;
+              return (
+                <button
+                  key={item.id}
+                  id={`${item.id}-tab-btn`}
+                  onClick={() => {
+                    setActiveTab(item.id);
+                    if (onClose) onClose();
+                  }}
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all group duration-200 ${
+                    isActive
+                      ? 'bg-brand-50 text-brand-600 shadow-sm'
+                      : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <Icon className={`w-4.5 h-4.5 transition-colors ${
+                      isActive ? 'text-brand-600' : 'text-slate-400 group-hover:text-slate-600'
+                    }`} />
+                    <span>{item.label}</span>
+                  </div>
+                  {isActive && (
+                    <ChevronRight className="w-3.5 h-3.5 text-brand-500 animate-pulse" />
+                  )}
+                </button>
+              );
+            })}
+          </nav>
+        </div>
+
+        {/* Footer Navigation & Profile Panel */}
+        <div>
+          <div className="p-4 border-t border-slate-100 space-y-1">
+            {secondaryNavItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = activeTab === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => {
+                    setActiveTab(item.id);
+                    if (onClose) onClose();
+                  }}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+                    isActive
+                      ? 'bg-brand-50 text-brand-600'
+                      : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                  }`}
+                >
+                  <Icon className={`w-4.5 h-4.5 ${
+                    isActive ? 'text-brand-600' : 'text-slate-400'
                   }`} />
                   <span>{item.label}</span>
-                </div>
-                {isActive && (
-                  <ChevronRight className="w-3.5 h-3.5 text-brand-500 animate-pulse" />
-                )}
-              </button>
-            );
-          })}
-        </nav>
-      </div>
-
-      {/* Footer Navigation & Profile Panel */}
-      <div>
-        <div className="p-4 border-t border-slate-100 space-y-1">
-          {secondaryNavItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = activeTab === item.id;
-            return (
-              <button
-                key={item.id}
-                onClick={() => setActiveTab(item.id)}
-                className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  isActive
-                    ? 'bg-brand-50 text-brand-600'
-                    : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
-                }`}
-              >
-                <Icon className={`w-4.5 h-4.5 ${
-                  isActive ? 'text-brand-600' : 'text-slate-400'
-                }`} />
-                <span>{item.label}</span>
-              </button>
-            );
-          })}
-        </div>
+                </button>
+              );
+            })}
+          </div>
 
         {/* User Profile Card */}
         <div className="p-4 border-t border-slate-100 bg-slate-50/50 flex items-center gap-3">
@@ -118,7 +139,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
         </div>
       </div>
     </div>
-  );
+  </>
+);
 };
 
 export default Sidebar;

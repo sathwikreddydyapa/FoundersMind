@@ -171,10 +171,10 @@ const ExpertisePortal: React.FC = () => {
   };
 
   return (
-    <div className="flex-1 flex overflow-hidden h-full bg-slate-50 font-sans">
+    <div className="flex-1 flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden h-full bg-slate-50 font-sans">
       
       {/* LEFT PANEL: AI Chat Interface for Employees */}
-      <div className="flex-1 flex flex-col h-full border-r border-slate-200 bg-slate-50/20 overflow-hidden">
+      <div className="flex-1 flex flex-col min-h-[550px] lg:h-full border-b lg:border-b-0 lg:border-r border-slate-200 bg-slate-50/20 overflow-hidden">
         
         {/* Portal Header */}
         <header className="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between shrink-0">
@@ -345,7 +345,7 @@ const ExpertisePortal: React.FC = () => {
       </div>
 
       {/* RIGHT PANEL: Real-time Extraction Panel */}
-      <div className="w-[450px] bg-white h-full border-l border-slate-200 flex flex-col overflow-hidden shrink-0">
+      <div className="w-full lg:w-[450px] bg-white h-auto lg:h-full border-t lg:border-t-0 lg:border-l border-slate-200 flex flex-col overflow-hidden shrink-0">
         
         {/* Panel Header */}
         <div className="h-16 border-b border-slate-200 px-5 flex items-center justify-between bg-slate-50/50 shrink-0">

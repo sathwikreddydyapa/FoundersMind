@@ -12,12 +12,15 @@ import {
   Bot,
   BrainCircuit,
   ArrowRight,
-  TrendingUp
+  TrendingUp,
+  Menu,
+  X
 } from 'lucide-react';
 
 
 function App() {
   const [activeTab, setActiveTab] = useState<string>('archive'); // Default to archive matching screenshot
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [geminiApiKey, setGeminiApiKey] = useState<string>(() => {
     return localStorage.getItem('foundersmind_gemini_api_key') || (import.meta.env.VITE_GEMINI_API_KEY as string) || '';
   });
@@ -198,9 +201,33 @@ function App() {
   };
 
   return (
-    <div className="flex h-screen bg-slate-100 overflow-hidden font-sans">
+    <div className="flex h-screen bg-slate-100 overflow-hidden font-sans flex-col lg:flex-row">
+      {/* Mobile Top Bar Header */}
+      <div className="h-14 bg-white border-b border-slate-200 px-4 flex items-center justify-between shrink-0 lg:hidden z-30">
+        <div className="flex items-center gap-2">
+          {/* Monogram matching Logo.tsx */}
+          <div className="w-8 h-8 rounded-lg bg-brand-50 flex items-center justify-center border border-brand-100">
+            <svg className="w-5 h-5 text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+            </svg>
+          </div>
+          <span className="font-bold font-outfit text-sm text-slate-900 tracking-tight">FoundersMind</span>
+        </div>
+        <button 
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="p-1.5 hover:bg-slate-50 rounded-lg text-slate-600 border border-slate-200 cursor-pointer"
+        >
+          {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
+      </div>
+
       {/* Sidebar Navigation */}
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Sidebar 
+        activeTab={activeTab} 
+        setActiveTab={setActiveTab} 
+        isOpen={isMobileMenuOpen}
+        onClose={() => setIsMobileMenuOpen(false)}
+      />
       
       {/* Active Tab View */}
       {renderContent()}

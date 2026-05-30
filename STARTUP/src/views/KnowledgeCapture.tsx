@@ -243,10 +243,10 @@ const KnowledgeCapture: React.FC<KnowledgeCaptureProps> = ({ apiKey }) => {
   ];
 
   return (
-    <div className="flex-1 flex overflow-hidden h-full bg-slate-50 font-sans">
+    <div className="flex-1 flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden h-full bg-slate-50 font-sans">
       
       {/* Central Section: The AI Interviewer Chat */}
-      <div className="flex-1 flex flex-col h-full bg-white border-r border-slate-200">
+      <div className="flex-1 flex flex-col min-h-[550px] lg:h-full bg-white border-b lg:border-b-0 lg:border-r border-slate-200">
         
         {/* Chat Header */}
         <div className="h-16 border-b border-slate-200 px-6 flex items-center justify-between shrink-0">
@@ -432,7 +432,7 @@ const KnowledgeCapture: React.FC<KnowledgeCaptureProps> = ({ apiKey }) => {
       </div>
 
       {/* Right Section: Real-Time Output Panel (Live Knowledge Extraction) */}
-      <div className="w-[420px] bg-white h-full flex flex-col overflow-hidden shrink-0">
+      <div className="w-full lg:w-[420px] bg-white h-auto lg:h-full border-t lg:border-t-0 border-slate-200 flex flex-col overflow-hidden shrink-0">
         
         {/* Panel Header */}
         <div className="h-16 border-b border-slate-200 px-5 flex items-center justify-between shrink-0 bg-slate-50/50">

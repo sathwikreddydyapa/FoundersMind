@@ -113,10 +113,10 @@ const ReportsAnalytics: React.FC = () => {
   ];
 
   return (
-    <div className="flex-1 p-8 overflow-y-auto bg-slate-50 flex flex-col gap-6 font-sans">
+    <div className="flex-1 p-4 sm:p-8 overflow-y-auto bg-slate-50 flex flex-col gap-6 font-sans">
       
       {/* Dashboard Top Title Section */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold font-outfit text-slate-900 tracking-tight">
             Reports & Analytics
@@ -183,7 +183,7 @@ const ReportsAnalytics: React.FC = () => {
             </button>
           </div>
 
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="h-48 w-full md:w-1/2 relative shrink-0">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>

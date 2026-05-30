@@ -190,10 +190,10 @@ const DecisionArchive: React.FC<DecisionArchiveProps> = ({ apiKey = '' }) => {
       </header>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex overflow-hidden p-6 gap-6">
+      <div className="flex-1 flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden p-6 gap-6">
         
         {/* Left Side: Archive + Timeline Grid */}
-        <div className="flex-1 flex flex-col gap-6 overflow-y-auto pr-2">
+        <div className="flex-1 flex flex-col gap-6 lg:overflow-y-auto pr-2">
           
           {/* Header & Filter Dropdowns */}
           <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm space-y-4 shrink-0">
@@ -257,9 +257,10 @@ const DecisionArchive: React.FC<DecisionArchiveProps> = ({ apiKey = '' }) => {
             </div>
 
             {/* Timeline Line Grid */}
-            <div className="relative pt-6 pb-2 px-8 flex items-center justify-between">
-              {/* Horizontal Connecting Dash Line */}
-              <div className="absolute top-1/2 -translate-y-1/2 left-12 right-12 h-0.5 border-t-2 border-dashed border-slate-200 z-0"></div>
+            <div className="overflow-x-auto pb-2 -mx-5 px-5 scrollbar-thin">
+              <div className="relative pt-6 pb-2 px-8 flex items-center justify-between min-w-[700px]">
+                {/* Horizontal Connecting Dash Line */}
+                <div className="absolute top-1/2 -translate-y-1/2 left-12 right-12 h-0.5 border-t-2 border-dashed border-slate-200 z-0"></div>
 
               {filteredMilestones.map((m) => {
                 const isSelected = selectedMilestone === m.id;
@@ -294,6 +295,7 @@ const DecisionArchive: React.FC<DecisionArchiveProps> = ({ apiKey = '' }) => {
                   </button>
                 );
               })}
+              </div>
             </div>
           </div>
 
@@ -390,7 +392,7 @@ const DecisionArchive: React.FC<DecisionArchiveProps> = ({ apiKey = '' }) => {
         </div>
 
         {/* Right Side: Analytics Panel Widgets */}
-        <div className="w-80 shrink-0 flex flex-col gap-6 overflow-y-auto">
+        <div className="w-full lg:w-80 shrink-0 flex flex-col gap-6 lg:overflow-y-auto pb-6 lg:pb-0">
           
           {/* Card: Decisions by Category Pie Chart */}
           <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col">

@@ -300,10 +300,10 @@ const SuccessorTraining: React.FC<SuccessorTrainingProps> = ({ apiKey }) => {
   };
 
   return (
-    <div className="flex-1 flex overflow-hidden h-full bg-slate-50 font-sans">
+    <div className="flex-1 flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden h-full bg-slate-50 font-sans">
       
       {/* Left Area: Progress Overview & Course Card Grid */}
-      <div className="flex-1 flex flex-col p-6 overflow-y-auto gap-6 pr-3">
+      <div className="flex-1 flex flex-col p-6 lg:overflow-y-auto gap-6 pr-3 min-h-[500px]">
         
         {/* Advisor Mode Toggle Switch (Top Center Dashboard Area) */}
         <div className="flex justify-center shrink-0">
@@ -347,7 +347,7 @@ const SuccessorTraining: React.FC<SuccessorTrainingProps> = ({ apiKey }) => {
               <span className="text-[9px] bg-brand-50 border border-brand-100 text-brand-700 px-2 py-0.5 rounded font-extrabold uppercase">LLM Persona Dynamic Routing</span>
             </div>
             
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               {/* Elon Musk Card */}
               <div 
                 onClick={() => togglePersona('Musk')}
@@ -504,7 +504,7 @@ const SuccessorTraining: React.FC<SuccessorTrainingProps> = ({ apiKey }) => {
       </div>
 
       {/* Right Area: Interactive AI Tutor Chat Panel */}
-      <div className="w-[420px] bg-white h-full border-l border-slate-200 flex flex-col overflow-hidden shrink-0">
+      <div className="w-full lg:w-[420px] bg-white h-auto lg:h-full border-t lg:border-t-0 lg:border-l border-slate-200 flex flex-col overflow-hidden shrink-0">
         
         {/* AI Tutor Panel Header */}
         <div className="h-16 border-b border-slate-200 px-5 flex items-center justify-between bg-slate-50/50 shrink-0">

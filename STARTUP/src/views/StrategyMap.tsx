@@ -160,10 +160,10 @@ const StrategyMap: React.FC = () => {
   };
 
   return (
-    <div className="flex-1 flex overflow-hidden h-full bg-slate-50 font-sans relative">
+    <div className="flex-1 flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden h-full bg-slate-50 font-sans relative">
       
       {/* Search overlay & Filters Panel (Top Left) */}
-      <div className="absolute top-6 left-6 z-10 w-72 bg-white rounded-2xl border border-slate-200 shadow-lg p-4 space-y-4">
+      <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-10 w-[calc(100vw-2rem)] sm:w-72 bg-white rounded-2xl border border-slate-200 shadow-lg p-4 space-y-4">
         <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
           <Network className="w-5 h-5 text-brand-600 shrink-0" />
           <div>
@@ -346,7 +346,7 @@ const StrategyMap: React.FC = () => {
 
       {/* SLIDING DETAIL DRAWER (Right Sidebar) */}
       {selectedNode && (
-        <div className="w-80 bg-white border-l border-slate-200 h-full flex flex-col overflow-hidden shrink-0 animate-fade-in relative z-25">
+        <div className="w-full lg:w-80 bg-white border-t lg:border-t-0 lg:border-l border-slate-200 h-[280px] lg:h-full flex flex-col overflow-hidden shrink-0 animate-fade-in relative z-25">
           
           <button 
             onClick={() => setSelectedNode(null)}
